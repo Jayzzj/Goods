@@ -16,7 +16,7 @@ class ArticlecategoryController extends Controller
         //分页
         $page = new Pagination([
             'totalCount' => $rows->count(),
-            'defaultPageSize' => 5,
+            'defaultPageSize' => 8,
         ]);
         $rst = $rows
             ->limit($page->pageSize)
@@ -34,7 +34,9 @@ class ArticlecategoryController extends Controller
           $acticleModel->load($request->post());
           //验证数据
             if ($acticleModel->validate()){
+                //保存数据
                 $acticleModel->save();
+                //显示提示信息
                 \Yii::$app->session->setFlash('success',"文章添加成功");
                return $this->redirect(Url::to(['articlecategory/index']));
             }else{
@@ -55,8 +57,11 @@ class ArticlecategoryController extends Controller
             $acticleModel->load($request->post());
             //验证数据
             if ($acticleModel->validate()){
+                //上传数据
                 $acticleModel->save();
+                //提示信息
                 \Yii::$app->session->setFlash('success',"文章修改成功");
+                //跳转主页
                 return $this->redirect(Url::to(['articlecategory/index']));
             }else{
                 var_dump($acticleModel->getErrors());exit;

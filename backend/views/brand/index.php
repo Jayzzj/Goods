@@ -3,7 +3,7 @@
 
 ?>
 <table class="table">
-    <a href="<?php echo \yii\helpers\Url::to(['brand/add'])?>" class="btn btn-success">添加</a>
+    <a href="<?php echo \yii\helpers\Url::to(['brand/add'])?>" class="btn btn-success">品牌添加</a>
     <tr>
         <th>品牌名称</th>
         <th>品牌简介</th>
@@ -21,9 +21,9 @@
         <td><?= $v->status == 1?"显示":"隐藏";?></td>
         <td>
  <a href="<?php echo \yii\helpers\Url::to(['brand/edit','id'=>$v->id])?>"
- class=" btn btn-info">编辑</a>
+ class=" btn btn-info glyphicon glyphicon-edit">编辑</a>
  <a href="<?php echo \yii\helpers\Url::to(['brand/del','id'=>$v->id])?>"
-    class=" btn btn-danger">删除</a>
+    class=" btn btn-danger glyphicon glyphicon-trash">删除</a>
         </td>
     </tr>
     <?php endforeach;?>

@@ -4,7 +4,7 @@
 
 
 <table class="table">
-    <a class="btn btn-success" href="<?= \yii\helpers\Url::to(['articlecategory/add'])?>">添加</a>
+    <a class="btn btn-success" href="<?= \yii\helpers\Url::to(['articlecategory/add'])?>">文章添加</a>
     <tr>
         <th>文章名称</th>
         <th>文章简介</th>
@@ -19,8 +19,8 @@
         <td><?= $v->sort?></td>
         <td><?= $v->status==1?"正常":"隐藏"?></td>
         <td>
-            <a class="btn btn-info" href="<?=\yii\helpers\Url::to(['articlecategory/edit','id'=>$v->id]) ?>">编辑</a>
-            <a class="btn btn-danger" href="<?=\yii\helpers\Url::to(['articlecategory/del','id'=>$v->id]) ?>">删除</a>
+            <a class="btn btn-info glyphicon glyphicon-edit" href="<?=\yii\helpers\Url::to(['articlecategory/edit','id'=>$v->id]) ?>">编辑</a>
+            <a class="btn btn-danger glyphicon glyphicon-trash" href="<?=\yii\helpers\Url::to(['articlecategory/del','id'=>$v->id]) ?>">删除</a>
         </td>
     </tr>
     <?php endforeach;?>
