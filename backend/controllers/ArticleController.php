@@ -31,28 +31,28 @@ class ArticleController extends Controller
         //接收get参数
         $data = \Yii::$app->request->get();
         //定义条件变量为空
-        $title="";
+        $name="";
         $intro = "";
         //判定该参数是否为空
-        if (!empty($data['title'])){
+        if (!empty($data['name'])){
             //拼接sql
-            $title = ' and {{%article}}.`name` like '."'%{$data['title']}%'";
+            //$title = ' and {{%article}}.`name` like '."'%{$data['title']}%'";
+            //         判定符  字段    值
+            $name = ['like','name',$data['name']];
         }
         //判定该参数值是否为空
         if (!empty($data['intro'])){
             //拼接sql
-            $intro = ' and {{%article}}.`intro` like '."'%{$data['intro']}%'";
+            //$intro = ' and {{%article}}.`intro` like '."'%{$data['intro']}%'";
+            $intro = ['like','intro',$data['intro']];
         }
         $article = new Article();
-        //连表查询
-        $rows = Article::find()
-            ->select('{{%article_category}}.name as category_name,{{%article}}.*')
-            ->innerJoin('{{%article_category}}','{{%article}}.article_category_id = {{%article_category}}.id')
-            ->where('{{%article}}.status != -1'."$title"."$intro");
+        //连表查询 注:andWhere的用法
+        $rows = Article::find()->andWhere(['!=','status','-1'])->andWhere($name)->andWhere($intro);
         //调用分页工具
         $pages = new Pagination(['totalCount' =>$rows->count(), 'defaultPageSize' => '8']);
         //获取根据条件查询的数据
-        $rst = $rows->offset($pages->offset)->limit($pages->limit)->asArray()->all();
+        $rst = $rows->offset($pages->offset)->limit($pages->limit)->all();
 //分配数据
         return $this->render('index',['rows'=>$rst,'article'=>$article,'pages'=>$pages]);
     }

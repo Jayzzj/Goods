@@ -37,7 +37,7 @@ class ArticlecategoryController extends Controller
                 //保存数据
                 $acticleModel->save();
                 //显示提示信息
-                \Yii::$app->session->setFlash('success',"文章添加成功");
+                \Yii::$app->session->setFlash('success',"添加成功");
                return $this->redirect(Url::to(['articlecategory/index']));
             }else{
                 var_dump($acticleModel->getErrors());exit;
@@ -60,7 +60,7 @@ class ArticlecategoryController extends Controller
                 //上传数据
                 $acticleModel->save();
                 //提示信息
-                \Yii::$app->session->setFlash('success',"文章修改成功");
+                \Yii::$app->session->setFlash('success',"修改成功");
                 //跳转主页
                 return $this->redirect(Url::to(['articlecategory/index']));
             }else{

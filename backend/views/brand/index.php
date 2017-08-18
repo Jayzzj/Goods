@@ -2,6 +2,7 @@
 
 
 ?>
+    <h1>品牌列表</h1>
 <table class="table">
     <a href="<?php echo \yii\helpers\Url::to(['brand/add'])?>" class="btn btn-success">品牌添加</a>
     <tr>

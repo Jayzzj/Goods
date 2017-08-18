@@ -11,16 +11,23 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'defaultRoute' => 'brand/index',//默认访问主页
+    'defaultRoute' => 'admin/login',//默认访问主页
     'modules' => [],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+//        'user' => [
+//            'identityClass' => 'backend\models\Login',
+//            'enableAutoLogin' => true,
+//            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+//        ],
+        //验证登录的主键
         'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+            'identityClass' => 'backend\models\Admin', //实现接口的类路径
+            'enableAutoLogin' => true,//默认记录登录信息
+            'loginUrl' => ['admin/login'],//没登陆情况下的跳转页面
+            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend

@@ -8,7 +8,12 @@ echo $form->field($article_model,'article_category_id')->dropDownList(\yii\helpe
 echo $form->field($article_model,'sort');
 echo $form->field($article_model,'status')->radioList([0=>'隐藏',1=>'显示']);
 //echo $form->field($articlecontent,'content')->textarea();
-echo $form->field($articlecontent,'content')->widget('kucha\ueditor\UEditor',[]);
+echo $form->field($articlecontent,'content')->widget('kucha\ueditor\UEditor',[
+    'clientOptions' => [
+        //编辑区域大小
+        'initialFrameHeight' => '200',
+        ]
+]);
 
 echo \yii\bootstrap\Html::submitButton('提交',['class'=>'btn btn-info']);
 \yii\bootstrap\ActiveForm::end();

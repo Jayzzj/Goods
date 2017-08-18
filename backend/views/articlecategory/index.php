@@ -1,10 +1,10 @@
 <?php
 /* @var $this yii\web\View */
 ?>
-
+<h1>文章分类列表</h1>
 
 <table class="table">
-    <a class="btn btn-success" href="<?= \yii\helpers\Url::to(['articlecategory/add'])?>">文章添加</a>
+    <a class="btn btn-success" href="<?= \yii\helpers\Url::to(['articlecategory/add'])?>">添加文章分类</a>
     <tr>
         <th>文章名称</th>
         <th>文章简介</th>

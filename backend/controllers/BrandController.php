@@ -117,33 +117,36 @@ class BrandController extends Controller
         return $this->render('add', ['model' => $model]);
     }
 
-
     public function actionEdit($id)
     {
-        $model = Brand::findOne($id);
+        $model =Brand::findOne($id);
         $request = \Yii::$app->request;
         if ($request->isPost) {
             //绑定数据
             $model->load($request->post());
-            //获取文件对象
-            $model->imgFile = UploadedFile::getInstance($model, 'imgFile');
 
             //验证数据
             if ($model->validate()) {
+                //获取文件对象
+                //$model->imgFile = UploadedFile::getInstance($model, 'imgFile');
+
                 //判定是否上传文件
-                if (!$model->imgFile == null) {
-                    //拼接路径
-                    $fileName = "/upload/" . uniqid() . '.' . $model->imgFile->extension;
-                    //保存上传文件
-                    $model->imgFile->saveAs(\Yii::getAlias('@webroot') . $fileName, false);
-                    $model->logo = $fileName;
-                }
+                //if (!$model->imgFile == null) {
+                //拼接路径
+                //$fileName = "/upload/" . uniqid() . '.' . $model->imgFile->extension;
+
+                //保存上传文件
+                //if ( $model->imgFile->saveAs(\Yii::getAlias('@webroot') . $fileName, false)){
+                // $model->logo = $fileName;
+                //}//
+
+                //}
                 //保存数据
                 $model->save();
                 //提示信息
                 \Yii::$app->session->setFlash('success', "修改成功 ");
                 //添加成功跳转
-              return  $this->redirect(['brand/index']);
+                return $this->redirect(['brand/index']);
             } else {
                 var_dump($model->getErrors());
                 exit;

@@ -2,10 +2,11 @@
 /* @var $this yii\web\View */
 
 ?>
-    <a class="btn btn-success glyphicon glyphicon-plus" href="<?= \yii\helpers\Url::to(['article/add'])?>">添加文章</a>
+<h1>文章列表</h1>
+    <a class="btn btn-success" href="<?= \yii\helpers\Url::to(['article/add'])?>">添加文章</a>
     <form id="w0" class="form-inline" action="/article/index" method="get" role="form"><div class="form-group field-articlesearchform-name">
             <label class="sr-only" for="articlesearchform-name">Name</label>
-            <input type="text" id="articlesearchform-name" class="form-control" name="title" placeholder="名称">
+            <input type="text" id="articlesearchform-name" class="form-control" name="name" placeholder="名称">
         </div><div class="form-group field-articlesearchform-intro">
             <label class="sr-only" for="articlesearchform-intro">Intro</label>
             <input type="text" id="articlesearchform-intro" class="form-control" name="intro" placeholder="简介">
@@ -23,24 +24,23 @@
             <th>文章内容</th>
             <th>文章操作</th>
         </tr>
-        <?php foreach ($rows as$k=> $v):?>
+        <?php foreach ($rows as $v):?>
             <tr>
-                <td><?= $v['name']?></td>
-                <td><?= $v['intro']?></td>
-                <td><?= $v['sort']?></td>
-                <td><?= $v['status']==1?"正常":"隐藏"?></td>
-                <td><?= $v['category_name']?></td>
-                <td><?= $v['create_time']?></td>
-                <td><a class="btn btn-default" href="<?=\yii\helpers\Url::to(['articledetail/index','id'=>$v['id']])?>">查看内容</a></td>
+                <td><?= $v->name?></td>
+                <td><?= $v->intro?></td>
+                <td><?= $v->sort?></td>
+                <td><?= $v->status==1?"正常":"隐藏"?></td>
+                <td><?= $v->category->name?></td>
+                <td><?= $v->create_time?></td>
+                <td><a class="btn btn-default" href="<?=\yii\helpers\Url::to(['articledetail/index','id'=>$v->id])?>">查看内容</a></td>
                 <td>
-                    <a class="btn btn-info glyphicon glyphicon-edit" href="<?=\yii\helpers\Url::to(['article/edit','id'=>$v['id']]) ?>">编辑</a>
-                    <a class="btn btn-danger glyphicon glyphicon-trash" href="<?=\yii\helpers\Url::to(['article/del','id'=>$v['id']]) ?>">删除</a>
+                    <a class="btn btn-info glyphicon glyphicon-edit" href="<?=\yii\helpers\Url::to(['article/edit','id'=>$v->id]) ?>">编辑</a>
+                    <a class="btn btn-danger glyphicon glyphicon-trash" href="<?=\yii\helpers\Url::to(['article/del','id'=>$v->id]) ?>">删除</a>
                 </td>
             </tr>
         <?php endforeach;?>
 
-    </table>
-<?= \yii\widgets\LinkPager::widget([
+    </table><?= \yii\widgets\LinkPager::widget([
     'pagination' => $pages,//控制器赋值的分页变量
     'maxButtonCount' => "10",//每页最多显示按钮个数
     'prevPageLabel' => '上页',//改变上一页按钮的字符，设置为fase不显示
