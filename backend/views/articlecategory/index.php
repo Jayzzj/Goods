@@ -20,7 +20,8 @@
         <td><?= $v->status==1?"正常":"隐藏"?></td>
         <td>
             <a class="btn btn-info glyphicon glyphicon-edit" href="<?=\yii\helpers\Url::to(['articlecategory/edit','id'=>$v->id]) ?>">编辑</a>
-            <a class="btn btn-danger glyphicon glyphicon-trash" href="<?=\yii\helpers\Url::to(['articlecategory/del','id'=>$v->id]) ?>">删除</a>
+
+            <button id="<?=$v->id?>" onclick="delarticlecategory(<?=$v->id?>)" class="btn btn-danger glyphicon glyphicon-trash">删除</button>
         </td>
     </tr>
     <?php endforeach;?>
@@ -36,3 +37,19 @@
     'hideOnSinglePage' => false,//如果你的数据过少，不够2页，默认不显示分页，可以设置为false
 //'options' => ['class' => '样式']//设置样式
 ])?>
+
+<script>
+    function delarticlecategory(id) {
+        if (confirm("确定删除吗?")){
+            $.getJSON("http://admin.yiishop.com/articlecategory/del","id="+id+"",function (data) {
+//
+                if (data ===1){
+                    //删除当前节点的父节点
+                    $("#"+id+"").closest('tr').remove();
+                }else {
+                    console.log(data);
+                }
+            })
+        }
+    }
+</script>

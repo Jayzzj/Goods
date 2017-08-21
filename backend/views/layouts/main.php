@@ -38,17 +38,24 @@ AppAsset::register($this);
 
     $menuItems = [
         ['label' => '主页', 'url' => ['/site/index']],
-        ['label' => '商品管理', 'url' => ['/goods/index']],
-        ['label' => '商品分类', 'url' => ['/goodscategory/index']],
-        ['label' => '品牌管理', 'url' => ['/brand/index']],
-        ['label' => '文章管理', 'url' => ['/article/index']],
-        ['label' => '文章分类', 'url' => ['/articlecategory/index']],
-        ['label' => '管理员列表', 'url' => ['/admin/index']],
+//        ['label' => '商品管理', 'url' => ['/goods/index']],
+//        ['label' => '商品分类', 'url' => ['/goodscategory/index']],
+        //['label' => '品牌管理', 'url' => ['/brand/index']],
+        //['label' => '文章管理', 'url' => ['/article/index']],
+       // ['label' => '文章分类', 'url' => ['/articlecategory/index']],
+        //['label' => '管理员列表', 'url' => ['/admin/index']],
+        //['label' => 'parmission', 'url' => ['/rbac/parmissionindex']],
+        //['label' => 'ROLE', 'url' => ['/rbac/roleindex']],
     ];
 
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => '登录', 'url' => ['/admin/login']];
     } else {
+
+//        $menuItems[] = ['label' => '注销', 'url' => ['/admin/logout']];
+//        var_dump(Yii::$app->user->identity->getMenuItems());exit;
+
+        $menuItems = array_merge($menuItems,Yii::$app->user->identity->getMenuItems());
         $menuItems[] = '<li>'
             . Html::beginForm(['/admin/logout'], 'post')
             . Html::submitButton(

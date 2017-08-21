@@ -21,8 +21,16 @@ class GoodscategoryController extends Controller
             if ($model->parent_id){
                 //获取该子节点的父节点对象
                 $parent = GoodsCategory::findOne($model->parent_id);
-                //添加子节点
-                $model->prependTo($parent);
+                //判定当前父节点的深度
+                if ($parent->depth >=2){
+
+                    \Yii::$app->session->setFlash('error','只能添加3级分类');
+                    return $this->render('add',['model'=>$model]);
+                }else{
+                    //添加子节点
+                    $model->prependTo($parent);
+                }
+
             }else{
                 //添加顶级分类
                 $model->makeRoot();
@@ -67,6 +75,12 @@ class GoodscategoryController extends Controller
                 if ($model->parent_id){
                     //获取该子节点的父节点对象
                     $parent = GoodsCategory::findOne($model->parent_id);
+                    //判定当前父节点的深度
+                    if ($parent->depth >=2){
+                        //提示信息
+                        \Yii::$app->session->setFlash('error','只能修改到2级分类下');
+                        return $this->render('add',['model'=>$model]);
+                    }
                     //添加子节点
                     $model->prependTo($parent);
                 }else{
@@ -90,7 +104,7 @@ class GoodscategoryController extends Controller
 
             \Yii::$app->session->setFlash('error','不能添加到当前节点或子节点下');
             //刷新
-            return $this->refresh();
+            //return $this->refresh();
         }
 
 
@@ -101,11 +115,14 @@ class GoodscategoryController extends Controller
     {
         //判定该节点下是否有子节点
         if (GoodsCategory::find()->where(['parent_id'=>$id])->count()) {
+            echo 0;
             \Yii::$app->session->setFlash('danger','该节点下有子节点不能删除');
+            //exit;
         }else{
             //根据此id删除数据
             GoodsCategory::deleteAll(['id'=>$id]);
-            \Yii::$app->session->setFlash('success','删除成功');
+            //\Yii::$app->session->setFlash('success','删除成功');
+            echo 1;
         }
 //        $model = GoodsCategory::findOne($id);
 //        //判定是否有子节点

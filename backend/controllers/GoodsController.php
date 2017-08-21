@@ -190,9 +190,9 @@ $sn=str_pad($num,5,"0",STR_PAD_LEFT);
         $model =  Goods::findOne($id);
         //更改状态值
         $model->status = 0;
-        $model->save();
-        \Yii::$app->session->setFlash('success','删除成功');
-        return $this->redirect(['index']);
+        echo $model->save();
+        //\Yii::$app->session->setFlash('success','删除成功');
+        //return $this->redirect(['index']);
     }
 
     public function actionSee($id)

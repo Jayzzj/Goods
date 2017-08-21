@@ -56,7 +56,7 @@ class GoodsgalleryController extends Controller
                 'afterValidate' => function (UploadAction $action) {},
                 'beforeSave' => function (UploadAction $action) {},
                 'afterSave' => function (UploadAction $action) {
-$action->output['fileUrl'] = $action->getWebUrl();
+$action->output['fileUrl'] = $action->getWebUrl();//输出图片地址
 //$action->getFilename(); // "image/yyyymmddtimerand.jpg"
 //$action->getWebUrl(); //  "baseUrl + filename, /upload/image/yyyymmddtimerand.jpg"
 //$action->getSavePath(); // "/var/www/htdocs/upload/image/yyyymmddtimerand.jpg"

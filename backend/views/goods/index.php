@@ -45,7 +45,8 @@
                     <a class="btn btn-warning glyphicon glyphicon-film" href="<?= \yii\helpers\Url::to(['goods/see','id'=>$v->id])?>">预览</a>
 <a href="<?php echo \yii\helpers\Url::to(['goods/edit','id'=>$v->id])?>" class=" btn btn-info glyphicon glyphicon-edit">编辑</a>
 
-<a href="<?php echo \yii\helpers\Url::to(['goods/del','id'=>$v->id])?>" class=" btn btn-danger glyphicon glyphicon-trash">删除</a>
+
+                    <button id="<?=$v->id?>" onclick="delgoods(<?=$v->id?>)" class=" btn btn-danger glyphicon glyphicon-trash">删除</button>
 
                 </td>
             </tr>
@@ -61,3 +62,19 @@
     'hideOnSinglePage' => false,//如果你的数据过少，不够2页，默认不显示分页，可以设置为false
 //'options' => ['class' => '样式']//设置样式
 ])?>
+
+<script>
+    function delgoods(id) {
+        if (confirm("确定删除吗?")){
+            $.getJSON("http://admin.yiishop.com/goods/del","id="+id+"",function (data) {
+//
+                if (data ===1){
+                    //删除当前节点的父节点
+                    $("#"+id+"").closest('tr').remove();
+                }else {
+                    console.log(data);
+                }
+            })
+        }
+    }
+</script>

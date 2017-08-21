@@ -132,13 +132,13 @@ class ArticleController extends Controller
         $article->status = -1;
 
         if ($article->validate()){
-            $article->save();
+            echo $article->save();
         }else{
             var_dump($article->getErrors());exit;
         }
 
-        \Yii::$app->session->setFlash('success','删除成功');
-        return $this->redirect(Url::to(['index']));
+        //\Yii::$app->session->setFlash('success','删除成功');
+        //return $this->redirect(Url::to(['index']));
 
     }
 

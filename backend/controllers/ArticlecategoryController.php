@@ -79,9 +79,9 @@ class ArticlecategoryController extends Controller
         //修改状态
         $acticlemodel->status = -1;
         //保存数据
-        $acticlemodel->save();
+        echo $acticlemodel->save();
         //跳转主页
-        $this->redirect(Url::to(['articlecategory/index']));
+       // $this->redirect(Url::to(['articlecategory/index']));
     }
 
 

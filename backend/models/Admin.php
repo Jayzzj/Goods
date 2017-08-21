@@ -31,7 +31,6 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
    public $rememberMe;
    //场景的定义
     const SCENARIO_ADD = 'add';
-    //const SCENARIO_MODIFY='modify';
     /**
      * @inheritdoc
      */
@@ -54,7 +53,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
             [['password'], 'required','on'=>self::SCENARIO_ADD],//这个验证值对添加生效
             //只针对修改密码的验证
             [['password'], 'string'],//至少为有值
-            [['username'], 'unique'],
+            [['username'], 'unique'],//唯一性验证
             [['email'], 'unique'],//唯一性验证
             [['email'], 'email'],
             [['password_reset_token'], 'unique'],
@@ -69,7 +68,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
         if ($insert){
             //自动生成时间戳
             $this->created_at = time();
-            //设置auth_key
+            //设置auth_key随机生成的字符串
             $this->auth_key = Yii::$app->security->generateRandomString();
         }else{//修改
             //跟新时间
@@ -157,6 +156,41 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $authKey === $this->getAuthKey();
 // TODO: Implement validateAuthKey() method.
+    }
+
+    public function getMenuItems(){
+        //定义一个空数组
+        $menuItems = [];
+        //二级菜单演示
+        //1 . 获取所有一级菜单
+       $menus = Menu::findAll(['parent_id'=>0]);
+
+        //2 遍历一级菜单
+        foreach ($menus as $menu){
+            //3.获取该一级菜单的所有子菜单
+            $children = Menu::findAll(['parent_id'=>$menu['id']]);
+
+            $items = [];
+            //4遍历所有子菜单
+            foreach ($children as $child){
+                //根据用户权限决定是否添加到items里面
+                if(Yii::$app->user->can($child->url)){
+                    $items[] = ['label' =>$child->label, 'url' => [$child->url]];
+                }
+            }
+            //当前菜单有子节点的时候才添加菜单到菜单栏
+            if (!$items==[]){
+                //添加菜单到菜单栏
+                $menuItems[] = ['label'=>$menu->label,'items'=>$items];
+            }
+
+            /*$menuItems[] = ['label' => '一级菜单', 'items'=>[
+                ['label' => '第一个二级菜单', 'url' => ['admin/add']],
+                ['label' => '第二个二级菜单', 'url' => ['admin/index']]
+            ]];*/
+        }
+
+        return $menuItems;
     }
 
 }

@@ -19,7 +19,7 @@
 
          <td>
              <a class="btn btn-info glyphicon glyphicon-edit" href="<?=\yii\helpers\Url::to(['goodscategory/edit','id'=>$v->id])?>">编辑</a>
-             <a class="btn btn-danger glyphicon glyphicon-trash" href="<?=\yii\helpers\Url::to(['goodscategory/del','id'=>$v->id])?>">删除</a>
+             <button class="btn btn-danger glyphicon glyphicon-trash" id="<?=$v->id?>" onclick="delgoodscategory(<?=$v->id?>)">删除</button>
          </td>
      </tr>
     <?php endforeach;?>
@@ -34,3 +34,19 @@
     'hideOnSinglePage' => false,//如果你的数据过少，不够2页，默认不显示分页，可以设置为false
 //'options' => ['class' => '样式']//设置样式
 ])?>
+<script>
+    function delgoodscategory(id) {
+        if (confirm("确定删除吗?")){
+            $.getJSON("http://admin.yiishop.com/goodscategory/del","id="+id+"",function (data) {
+                console.dir(data);
+//
+                if (data ===1){
+                    //删除当前节点的父节点
+                    $("#"+id+"").closest('tr').remove();
+                }else {
+                    alert("该节点下有子节点不能删除");
+                }
+            })
+        }
+    }
+</script>
