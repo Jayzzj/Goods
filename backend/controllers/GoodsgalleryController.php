@@ -9,6 +9,7 @@
 namespace backend\controllers;
 
 
+use backend\filters\RbacFilter;
 use backend\models\GoodsGallery;
 use flyok666\qiniu\Qiniu;
 use flyok666\uploadifive\UploadAction;
@@ -17,6 +18,15 @@ use yii\web\UploadedFile;
 use yii\helpers\Json;
 class GoodsgalleryController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class' => RbacFilter::className(),
+                'except' => ['login','logout','code','upload','s-upload']//排除不需要权限的方法
+            ]
+        ];
+    }
 
     public function actions() {
         return [
@@ -126,6 +136,8 @@ $action->output['fileUrl'] = $action->getWebUrl();//输出图片地址
         //根据传过来的id删除对应的数并返回数据给视图Ajax
         echo GoodsGallery::deleteAll(['id'=>$id]);
     }
+
+
 
 
 }

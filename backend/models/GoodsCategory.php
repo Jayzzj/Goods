@@ -124,4 +124,10 @@ class GoodsCategory extends \yii\db\ActiveRecord
             )
         );
     }
+
+    public function getGoodscategory()
+    {
+        //建立商品分类一对多的关系
+        return $this->hasMany(self::className(),['parent_id'=>'id']);
+    }
 }

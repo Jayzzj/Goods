@@ -11,12 +11,14 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    //'defaultRoute' => 'user/register',//默认访问主页
+    'layout'=>false,
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'frontend\models\member',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
@@ -54,6 +56,14 @@ return [
                   //自定义路由规则
             ],
         ],
+
+        'sms'=>[//配置阿里大于
+            'class'=>\frontend\components\Sms::className(),
+            'ak'=>'LTAIsvBW8jYNnIq1',//Ak
+            'sk'=>'4NpObxLikf7vS0KUWdYYmnV2jgMHWx',//SK
+            'sign'=>'周先生的店铺',//短信签名
+            'template'=>'SMS_87150024'//模板id
+        ]
 
 ],
     'params' => $params,

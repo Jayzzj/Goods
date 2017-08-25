@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use frontend\models\Cart;
 use Yii;
 
 /**
@@ -81,5 +82,24 @@ class Goods extends \yii\db\ActiveRecord
     public function getBrandcategory()
     {
         return $this->hasOne(Brand::className(),['id'=>'brand_id']);
+    }
+
+    //获取商品信息
+    public function getGoodsgallery()
+    {
+        //建立1dui多关系
+        return $this->hasMany(GoodsGallery::className(),['goods_id'=>'id']);
+    }
+
+    public function getIntro()
+    {
+        //建立1对1关系
+        return $this->hasOne(GoodsIntro::className(),['goods_id'=>'id']);
+    }
+
+
+    public function getCart()
+    {
+        return $this->hasOne(Cart::className(),['goods_id'=>'id']);
     }
 }

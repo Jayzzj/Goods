@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\filters\RbacFilter;
 use backend\models\ArticleCategory;
 use yii\data\Pagination;
 use yii\helpers\Url;
@@ -9,6 +10,15 @@ use yii\web\Controller;
 
 class ArticlecategoryController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class' => RbacFilter::className(),
+                'except' => ['login','logout','code','upload','s-upload']//排除不需要权限的方法
+            ]
+        ];
+    }
     public function actionIndex()
     {
         //获取所有数据

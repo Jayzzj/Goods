@@ -4,6 +4,7 @@
 namespace backend\controllers;
 
 
+use backend\filters\RbacFilter;
 use backend\models\Brand;
 use yii\data\Pagination;
 use yii\helpers\Url;
@@ -14,6 +15,15 @@ use flyok666\qiniu\Qiniu;
 
 class BrandController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class' => RbacFilter::className(),
+                'except' => ['login','logout','code','upload','s-upload']//排除不需要权限的方法
+            ]
+        ];
+    }
     public function actions() {
         return [
             's-upload' => [

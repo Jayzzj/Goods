@@ -6,6 +6,7 @@ class RbacFilter extends \yii\base\ActionFilter
 
     public function beforeAction($action)
     {
+//        var_dump($action->uniqueId);exit;
         //当前访问路由是否有权限
         if (!\Yii::$app->user->can($action->uniqueId)){
             //如果没有登录跳转登录页面

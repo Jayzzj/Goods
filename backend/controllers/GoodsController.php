@@ -4,8 +4,10 @@
 namespace backend\controllers;
 
 
+use backend\filters\RbacFilter;
 use backend\models\Brand;
 use backend\models\Goods;
+use backend\models\GoodsCategory;
 use backend\models\GoodsDayCount;
 use backend\models\GoodsGallery;
 use backend\models\GoodsIntro;
@@ -17,6 +19,15 @@ use flyok666\uploadifive\UploadAction;
 
 class GoodsController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class' => RbacFilter::className(),
+                'except' => ['login','logout','code','upload','s-upload']//排除不需要权限的方法
+            ]
+        ];
+    }
     public function actions() {
         return [
             's-upload' => [
@@ -116,8 +127,17 @@ class GoodsController extends Controller
         $goodsIntro =new GoodsIntro();
         //goods_day_count 商品每日添加数
         $goodsCount = new GoodsDayCount();
+
         //判定判定和验证是否成功
         if ($model->load(\Yii::$app->request->post() )&& $model->validate()&&$goodsIntro->load(\Yii::$app->request->post()) && $goodsIntro->validate()){
+            $Category = GoodsCategory::findOne(['id'=>\Yii::$app->request->post()['Goods']['goods_category_id']]);
+//            var_dump($Category['depth']);exit;
+            if($Category['depth']<2){
+               //$model->addError('goods_category_id','只能添加到3级分类下');
+                \Yii::$app->session->setFlash('success','只能添加到3级分类下');
+               return $this->refresh();
+            }
+//            var_dump(\Yii::$app->request->post());exit;
             $model->create_time = time();
 
             //根据当天时间获取当天GoodsDayCount的一个对象
@@ -166,6 +186,7 @@ $sn=str_pad($num,5,"0",STR_PAD_LEFT);
     {
         $model =  Goods::findOne($id);
         $goodsIntro =GoodsIntro::findOne($id);
+//        var_dump($goodsIntro);exit;
         //goods_day_count 商品每日添加数
         //判定判定和验证是否成功
         if ($model->load(\Yii::$app->request->post())&& $model->validate()){
@@ -205,6 +226,9 @@ $sn=str_pad($num,5,"0",STR_PAD_LEFT);
         return $this->render('see',['intro'=>$intro,'imgs'=>$Imgs]);
 
     }
+
+
+
 
 
 

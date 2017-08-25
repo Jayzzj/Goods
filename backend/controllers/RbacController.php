@@ -4,12 +4,22 @@
 namespace backend\controllers;
 
 
+use backend\filters\RbacFilter;
 use backend\models\ParmissionFrom;
 use backend\models\RoleFrom;
 use yii\web\Controller;
 
 class RbacController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class' => RbacFilter::className(),
+                'except' => ['login','logout','code','upload','s-upload']//排除不需要权限的方法
+            ]
+        ];
+    }
     public function actionParmissionadd()
     {
         $parmissions = new ParmissionFrom();

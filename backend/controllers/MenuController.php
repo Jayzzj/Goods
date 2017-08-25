@@ -4,6 +4,7 @@
 namespace backend\controllers;
 
 
+use backend\filters\RbacFilter;
 use backend\models\Admin;
 use backend\models\Menu;
 use yii\data\Pagination;
@@ -11,6 +12,15 @@ use yii\web\Controller;
 
 class MenuController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class' => RbacFilter::className(),
+                'except' => ['login','logout','code','upload','s-upload']//排除不需要权限的方法
+            ]
+        ];
+    }
     public function actionAdd()
     {
         $model =new  Menu();
