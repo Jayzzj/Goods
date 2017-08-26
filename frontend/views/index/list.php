@@ -473,7 +473,7 @@
                 <?php foreach ($goods as $good):?>
                 <li>
                     <dl>
-                        <dt><a href=<?=\yii\helpers\Url::to(['goods/goods','id'=>$good->id])?>><img src="<?="http://admin.yiishop.com".$good->logo?>" alt="" /></a>
+                        <dt><a href=<?=\yii\helpers\Url::to(['goods/goods','id'=>$good->id])?>><img src="<?="http://shop4admin.bigphp.cn".$good->logo?>" alt="" /></a>
                         </dt>
                         <dd><a href=""><?=$good->name?></a>
                         </dt>
