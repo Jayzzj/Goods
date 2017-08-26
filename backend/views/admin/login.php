@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(); ?>
             <?= $form->field($model, 'username')?>
             <?= $form->field($model, 'password')->passwordInput() ?>
-            <?= $form->field($model, 'code')->widget('\yii\captcha\captcha', [
+            <?= $form->field($model, 'code')->widget(\yii\captcha\Captcha::className(), [
                 'captchaAction'=>'admin/code',
                 'template' => '<div class="row"><div class="col-lg-9 col-md-9">{input}</div><div class="col-lg-3 col-md-3">{image}</div></div>'
             ]) ?>

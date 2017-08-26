@@ -20,7 +20,8 @@ class m170821_095310_create_address_table extends Migration
             'cmbArea'=>$this->string('50')->comment('区县名称'),
             'address'=>$this->string(255)->comment('地址'),
             'tel'=>$this->integer(11)->comment('联系电话'),
-            'status'=>$this->integer(1)->comment('状态')
+            'status'=>$this->integer(1)->comment('状态'),
+            'member_id'=>$this->integer()->comment('用户id')
         ]);
     }
 
