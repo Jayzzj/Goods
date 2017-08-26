@@ -508,7 +508,7 @@
 
                 <tr>
                     <td><a href=""><?=$v['order_id']?></a></td>
-                    <td><a href=""><img src="<?=$v['logo']?>" alt="" /></a></td>
+                    <td><a href=""><img src="<?='http://shop4admin.bigphp.cn'.$v['logo']?>" alt="" /></a></td>
 
                     <td><?=$v['name']?></td>
                     <td>￥<?=$v['total']?> <?=$v['delivery_name']?></td>

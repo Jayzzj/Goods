@@ -335,8 +335,8 @@
 
                    <?php  if ($k==0){?>
                 <div class="midpic">
-                    <a href="<?="http://admin.yiishop.com".$v->path?>" class="jqzoom" rel="gal1">   <!-- 第一幅图片的大图 class 和 rel属性不能更改 -->
-                        <img src="<?="http://admin.yiishop.com".$v->path?>" alt="" width="350" />               <!-- 第一幅图片的中图 -->
+                    <a href="<?="http://shop4admin.bigphp.cn".$v->path?>" class="jqzoom" rel="gal1">   <!-- 第一幅图片的大图 class 和 rel属性不能更改 -->
+                        <img src="<?="http://shop4admin.bigphp.cn".$v->path?>" alt="" width="350" />               <!-- 第一幅图片的中图 -->
                     </a>
                 </div>
 
@@ -356,7 +356,7 @@
                             <?php }else{
                                 echo "<li>"."<a";;
                             }?>
-                                 href="javascript:void(0);" rel="{gallery: 'gal1', smallimage: '<?="http://admin.yiishop.com".$v->path?>',largeimage: '<?="http://admin.yiishop.com".$v->path?>'}"><img src="<?="http://admin.yiishop.com".$v->path?>"></a>
+                                 href="javascript:void(0);" rel="{gallery: 'gal1', smallimage: '<?="http://shop4admin.bigphp.cn".$v->path?>',largeimage: '<?="http://shop4admin.bigphp.cn".$v->path?>'}"><img src="<?="http://shop4admin.bigphp.cn".$v->path?>"></a>
                             </li>
                             <?php endforeach;?>
                         </ul>
