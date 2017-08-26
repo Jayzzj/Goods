@@ -15,13 +15,14 @@ class AddressController  extends Controller
         $model = new Address();
         //获取所有数据
         if ($model->load(\Yii::$app->request->post(),'') && $model->validate()){
-            //var_dump(\Yii::$app->request->post('tel'));exit;
+            $model->member_id = \Yii::$app->user->id;
             //保存数据
             $model->save();
             //判定是否勾选默认地址
             if ($model->status){
                 //获取id
                   $id= $model->id;
+//                  var_dump($id);exit;
                 //修改所有地址为1的数据排除才修改的那个
                 Address::updateAll(['status'=>0],'id!='.$id);
             }
