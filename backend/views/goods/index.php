@@ -66,7 +66,7 @@
 <script>
     function delgoods(id) {
         if (confirm("确定删除吗?")){
-            $.getJSON("goods/del","id="+id+"",function (data) {
+            $.getJSON("del","id="+id+"",function (data) {
 //
                 if (data ===1){
                     //删除当前节点的父节点

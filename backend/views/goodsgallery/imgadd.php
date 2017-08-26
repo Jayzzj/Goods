@@ -70,7 +70,7 @@ yii\bootstrap\ActiveForm::end();
         //返回true表示删除
         if (isdel === true){
             //利用Ajax请求根据id删除数据
-            $.getJSON("http://admin.yiishop.com/goodsgallery/del","id="+id+"",function (data){
+            $.getJSON("del","id="+id+"",function (data){
                 //判定数据库是否删除成功成功返回1
                 if (data === 1){
                     //根据id获取对应的父节点并删除

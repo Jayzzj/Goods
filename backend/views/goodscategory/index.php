@@ -37,7 +37,7 @@
 <script>
     function delgoodscategory(id) {
         if (confirm("确定删除吗?")){
-            $.getJSON("http://admin.yiishop.com/goodscategory/del","id="+id+"",function (data) {
+            $.getJSON("del","id="+id+"",function (data) {
                 console.dir(data);
 //
                 if (data ===1){

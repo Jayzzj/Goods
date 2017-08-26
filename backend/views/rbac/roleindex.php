@@ -64,7 +64,7 @@
         //返回true表示删除
         if (confirm("删除?")){
             //利用Ajax请求根据id删除数据
-            $.getJSON("http://admin.yiishop.com/rbac/roledel","name="+name+"",function (data){
+            $.getJSON("roledel","name="+name+"",function (data){
                 //console.log(data);
 
                 //判定数据库是否删除成功成功返回1

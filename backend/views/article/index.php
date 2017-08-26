@@ -54,7 +54,7 @@
 <script>
     function delarticle(id) {
         if (confirm("确定删除吗?")){
-            $.getJSON("http://admin.yiishop.com/article/del","id="+id+"",function (data) {
+            $.getJSON("del","id="+id+"",function (data) {
 //
                 if (data ===1){
                     //删除当前节点的父节点
