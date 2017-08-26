@@ -37,7 +37,7 @@ function(file, data, response) {
         //$("#goods-logo").val(data.fileUrl);
         }
         //添加图片的ajax请求
-        $.getJSON("http://admin.yiishop.com/goodsgallery/add","path="+data.fileUrl+"&goods_id=$model->goods_id",function (data) {
+        $.getJSON("add","path="+data.fileUrl+"&goods_id=$model->goods_id",function (data) {
         //console.log(data);
                 //遍历得到的对象
                 //追加到行标签span中
