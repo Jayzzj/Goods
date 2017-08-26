@@ -168,7 +168,7 @@
         },1000);
         var tel = $('#tel').val();
         //发起Ajax请求
-        $.getJSON('http://www.yiishop.com/user/sms',{tel:tel},function (data) {
+        $.getJSON('sms',{tel:tel},function (data) {
             console.log(data);
         });
     }
