@@ -171,7 +171,7 @@
         $.getJSON('sms',{tel:tel},function (data) {
             console.log(data);
         });
-    }
+    } 
 //   function checkSms() {
 //        //获取手机号
 //       var tel = $('#tel').val();
