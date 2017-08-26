@@ -632,7 +632,7 @@
     function delAddress(id) {
         //var url = this.attr(url);
 //        console.log(id);
-        $.getJSON('http://www.yiishop.com/address/del',"id="+id+"",function (data) {
+        $.getJSON('del',"id="+id+"",function (data) {
           if (data===1){
 //              $("#"+id+"").parent().parent().remove();
               console.log($("#"+id+"").closest('dl').remove());
