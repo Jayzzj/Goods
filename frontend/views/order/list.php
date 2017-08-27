@@ -23,7 +23,8 @@
 
         </div>
         <div class="topnav_right fr">
-            <ul><li>您好，欢迎来到京西！[
+            <ul>
+                <li>您好，欢迎来到京西！[
                     <?php if (isset(\Yii::$app->user->identity->username)){
                         echo \Yii::$app->user->identity->username;
                         $url = \yii\helpers\Url::to(['user/logout']);
@@ -504,40 +505,36 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($orders as $k =>$v):?>
-
+                <?php foreach ($orders as $order):?>
                 <tr>
-                    <td><a href=""><?=$v['order_id']?></a></td>
-                    <td><a href=""><img src="<?='http://shop4admin.bigphp.cn'.$v['logo']?>" alt="" /></a></td>
-
-                    <td><?=$v['name']?></td>
-                    <td>￥<?=$v['total']?> <?=$v['delivery_name']?></td>
-                    <td><?=date('Y-m-d H:i:s',$v['create_time'])?></td>
+                    <td><a href=""><?= $order->ordergoods->id?></a></td>
+                    <td><a href=""><img src="<?=$order->ordergoods->logo?>" alt="" /></a></td>
+                    <td><?=$order->name?></td>
+                    <td>￥<?=$order->total?> <?=$order->delivery_name?></td>
+                    <td><?= date('Y-m-d H:i:s',$order->create_time)?></td>
                     <td>
-
                         <?php
-                        if ($v['status'] ==0)
+                        if ($order->status ==0)
                         {
                             echo '取消';
                         }
-                            if($v['status'] ==1){
+                        if($order->status ==1){
                             echo '待付款';
                         }
-                        if($v['status'] ==2){
+                        if($order->status ==2){
                             echo '待发货';
                         }
-                        if($v['status'] ==3){
+                        if($order->status ==3){
                             echo '待收货';
                         }
-                        if($v['status'] ==4){
+                        if($order->status ==4){
                             echo '完成';
                         }
 
-                            ?>
+                        ?>
                     </td>
                     <td><a href="">查看</a> | <a href="">删除</a></td>
                 </tr>
-
                 <?php endforeach;?>
                 </tbody>
             </table>

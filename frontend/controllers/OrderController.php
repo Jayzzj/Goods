@@ -38,7 +38,6 @@ class OrderController extends Controller
         }else{
             $carts =[];
         }
-
         //判定接收方式
         if (\Yii::$app->request->isPost){
         //开启事务
@@ -74,9 +73,9 @@ class OrderController extends Controller
 
                 var_dump($order->getErrors());echo 22;exit;
             }
-            //依次查询购物车商品的库存
+            //根据用户id获取该用户的购物车所有数据
             $carts = Cart::find()->where(['member_id'=>\Yii::$app->user->id])->all();
-            //
+            //依次查询购物车商品的库存
             foreach ($carts as $cart){
                 //查询单条商品信息
                 $goods = Goods::findOne(['id'=>$cart->goods_id]);
@@ -128,7 +127,22 @@ class OrderController extends Controller
     }
 
 
+
+
     public function actionList()
+    {
+
+        if (\Yii::$app->user->isGuest) {
+            echo '你还未登录~<a href="http://shop4.bigphp.cn/user/login">点击跳转登录</a>';
+        } else {
+            $id = \Yii::$app->user->id;
+            $orders = Order::find()->where(['member_id' => $id])->all();
+            return $this->render('list', ['orders' => $orders]);
+        }
+    }
+
+    //错误方法
+    public function actionTest()
     {
         if (\Yii::$app->user->isGuest) {
             echo '你还未登录~<a href="http://shop4.bigphp.cn/user/login">点击跳转登录</a>';
