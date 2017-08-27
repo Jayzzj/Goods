@@ -18,7 +18,7 @@ class OrderController extends Controller
     public function actionOrder()
     {
         if (\Yii::$app->user->isGuest){
-            echo '你还未登录~<a href="http://www.yiishop.com/user/login">点击跳转登录</a>';
+            echo '你还未登录~<a href="http://shop4.bigphp.cn/user/login">点击跳转登录</a>';
         }else{
         //获取用户地址信息
         $address = Address::findAll(['member_id'=>\Yii::$app->user->id]);
@@ -111,7 +111,7 @@ class OrderController extends Controller
         }catch (Exception $e){
             //捕获异常回滚事务
             $transaction->rollBack();
-            echo  $e->getMessage().'<a href="http://www.yiishop.com/order/order">返回修改</a>';
+            echo  $e->getMessage().'<a href="http://shop4.bigphp.cn/order/order">返回修改</a>';
             exit;
 
         }
@@ -131,7 +131,7 @@ class OrderController extends Controller
     public function actionList()
     {
         if (\Yii::$app->user->isGuest) {
-            echo '你还未登录~<a href="http://www.yiishop.com/user/login">点击跳转登录</a>';
+            echo '你还未登录~<a href="http://shop4.bigphp.cn/user/login">点击跳转登录</a>';
         } else {
             //获取用户id
             $member_id = \Yii::$app->user->id;

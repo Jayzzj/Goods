@@ -107,6 +107,10 @@ class CartController extends Controller
             //$carts ='';
         }
 
+        if(empty($carts)){
+            echo '购物车没有商品~请添加商品'.'<a href="http://shop4.bigphp.cn/index/index">点击跳转</a>';exit;
+        }
+
         //分配到视图
         return $this->render('cart', ['goods' => $goods, 'carts' => $carts]);
 
