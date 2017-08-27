@@ -29,7 +29,7 @@ class AddressController  extends Controller
             return $this->refresh();
         }
         //获取所有地址信息
-        $model = Address::find()->all();
+        $model = Address::find()->where(['member_id'=>\Yii::$app->user->id])->all();
 
        return $this->render('address',['model'=>$model]);
     }
