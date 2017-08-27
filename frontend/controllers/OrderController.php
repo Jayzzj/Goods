@@ -22,10 +22,7 @@ class OrderController extends Controller
         }else{
         //获取用户地址信息
         $address = Address::findAll(['member_id'=>\Yii::$app->user->id]);
-        //判定地址信息是否存在
-        if (!$address){
-            echo '你还未添加收货地址.<a href="http://shop4.bigphp.cn/address/index">点击添加</a>';exit;
-        }
+
         //获取该用户购物车的所有商品id
         $ids = Cart::find()->select('goods_id')->where(['member_id'=>\Yii::$app->user->id])->column();
         //获取该用户的所有商品信息
@@ -53,6 +50,10 @@ class OrderController extends Controller
             $order = new Order();
             //根据传过来的地址id获取地址信息
             $address = Address::findOne(['id'=>$data['address_id']]);
+            //判定地址信息是否存在
+            if (!$address){
+                echo '你还未添加收货地址.<a href="http://shop4.bigphp.cn/address/index">点击添加</a>';exit;
+            }
             //绑定数据
             $order->province = $address->cmbProvince;
             $order->city = $address->cmbCity;
