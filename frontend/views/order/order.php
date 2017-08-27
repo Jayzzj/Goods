@@ -178,7 +178,7 @@
                 <?php foreach ($goods as$good):?>
 
                 <tr>
-                    <td class="col1"><a href=""><img src="<?=$good->logo?>" alt="" /></a>  <strong><a href=""><?=$good->name?></a></strong></td>
+                    <td class="col1"><a href=""><img src="http://shop4admin.bigphp.cn.<?=$good->logo?>" alt="" /></a>  <strong><a href=""><?=$good->name?></a></strong></td>
                     <td class="col3">￥<?=$good->shop_price?></td>
                     <td class="col4"> <?=$carts[$good->id]?></td>
                     <?php $goodsnum +=$carts[$good->id]?>
